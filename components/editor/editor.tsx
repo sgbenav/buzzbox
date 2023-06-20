@@ -55,7 +55,7 @@ export const Editor: React.FC<EditorProps> = ({ hiveId }) => {
       })
     },
     onSuccess: () => {
-      // turn pathname /r/mycommunity/submit into /r/mycommunity
+      // turn pathname /hive/mycommunity/submit into /hive/mycommunity
       const newPathname = pathname.split('/').slice(0, -1).join('/')
       router.push(newPathname)
 

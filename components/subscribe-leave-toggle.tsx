@@ -56,7 +56,7 @@ const SubscribeLeaveToggle = ({
       })
       toast({
         title: 'Subscribed!',
-        description: `You are now subscribed to r/${hiveName}`,
+        description: `You are now subscribed to hive/${hiveName}`,
       })
     },
   })

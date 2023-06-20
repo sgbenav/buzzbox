@@ -60,7 +60,7 @@ const Page = () => {
   })
 
   return (
-    <div className='container mx-auto flex h-full max-w-3xl items-center'>
+    <div className='mx-auto flex h-full max-w-3xl items-center'>
       <div className='relative h-fit w-full space-y-6 rounded-lg border bg-background p-8'>
         <div className='flex items-center justify-between'>
           <h1 className='text-xl font-semibold'>Create a Community</h1>
@@ -89,7 +89,7 @@ const Page = () => {
           <Button
             disabled={isLoading}
             onClick={() => router.back()}
-            variant="outline"
+            variant='outline'
           >
             Cancel
           </Button>
@@ -97,7 +97,7 @@ const Page = () => {
             isLoading={isLoading}
             disabled={input.length === 0}
             onClick={() => createCommunity()}
-            variant="primary"
+            variant='primary'
           >
             Create Community
           </Button>
