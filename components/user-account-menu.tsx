@@ -43,7 +43,7 @@ export function UserAccountMenu({ user }: UserAccountMenuProps) {
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
-          <Link href='/r/create'>Create Community</Link>
+          <Link href='/hive/create'>Create Community</Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
