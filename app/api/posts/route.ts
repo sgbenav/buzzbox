@@ -1,6 +1,7 @@
+import { z } from 'zod'
+
 import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { z } from 'zod'
 
 export async function GET(req: Request) {
   const url = new URL(req.url)
@@ -12,16 +13,16 @@ export async function GET(req: Request) {
   if (session) {
     const followedCommunities = await db.subscription.findMany({
       where: {
-        userId: session.user.id
+        userId: session.user.id,
       },
       include: {
-        hive: true
-      }
+        hive: true,
+      },
     })
 
     console.log(followedCommunities)
 
-    followedCommunitiesIds = followedCommunities.map(sub => sub.hive.id)
+    followedCommunitiesIds = followedCommunities.map((sub) => sub.hive.id)
   }
 
   try {
@@ -29,12 +30,12 @@ export async function GET(req: Request) {
       .object({
         limit: z.string(),
         page: z.string(),
-        hiveName: z.string().nullish().optional()
+        hiveName: z.string().nullish().optional(),
       })
       .parse({
         hiveName: url.searchParams.get('hiveName'),
         limit: url.searchParams.get('limit'),
-        page: url.searchParams.get('page')
+        page: url.searchParams.get('page'),
       })
 
     let whereClause = {}
@@ -42,16 +43,16 @@ export async function GET(req: Request) {
     if (hiveName) {
       whereClause = {
         hive: {
-          name: hiveName
-        }
+          name: hiveName,
+        },
       }
     } else if (session) {
       whereClause = {
         hive: {
           id: {
-            in: followedCommunitiesIds
-          }
-        }
+            in: followedCommunitiesIds,
+          },
+        },
       }
     }
 
@@ -59,15 +60,15 @@ export async function GET(req: Request) {
       take: parseInt(limit),
       skip: (parseInt(page) - 1) * parseInt(limit), // skip should start from 0 for page 1
       orderBy: {
-        createdAt: 'desc'
+        createdAt: 'desc',
       },
       include: {
         hive: true,
         votes: true,
         author: true,
-        comments: true
+        comments: true,
       },
-      where: whereClause
+      where: whereClause,
     })
 
     return new Response(JSON.stringify(posts))

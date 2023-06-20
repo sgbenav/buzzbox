@@ -46,7 +46,6 @@ export default function RootLayout({ children, modal }: RootLayoutProps) {
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
             <QueryProvider>
               <div className='relative flex min-h-screen flex-col'>
-                {/* @ts-expect-error Server Component */}
                 <Header />
                 <main className='container mx-auto h-full flex-1 pt-10'>
                   {children}

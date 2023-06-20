@@ -1,15 +1,16 @@
-import CommentsSection from '@/components/comment/comment-section'
-import EditorOutput from '@/components/editor/editor-output'
-import PostVoteServer from '@/components/post/post-vote-server'
-import { buttonVariants } from '@/components/ui/button'
+import { Suspense } from 'react'
+import { notFound } from 'next/navigation'
+import { Post, User, Vote } from '@prisma/client'
+import { ArrowBigDown, ArrowBigUp, Loader2 } from 'lucide-react'
+
+import { CachedPost } from '@/types/redis'
 import { db } from '@/lib/db'
 import { redis } from '@/lib/redis'
 import { formatTimeToNow } from '@/lib/utils'
-import { CachedPost } from '@/types/redis'
-import { Post, User, Vote } from '@prisma/client'
-import { ArrowBigDown, ArrowBigUp, Loader2 } from 'lucide-react'
-import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
+import { buttonVariants } from '@/components/ui/button'
+import CommentsSection from '@/components/comment/comment-section'
+import EditorOutput from '@/components/editor/editor-output'
+import PostVoteServer from '@/components/post/post-vote-server'
 
 interface SubHivePostPageProps {
   params: {
@@ -43,9 +44,8 @@ const SubHivePostPage = async ({ params }: SubHivePostPageProps) => {
 
   return (
     <div>
-      <div className='h-full flex flex-col sm:flex-row items-center sm:items-start justify-between'>
+      <div className='flex h-full flex-col items-center justify-between sm:flex-row sm:items-start'>
         <Suspense fallback={<PostVoteShell />}>
-          {/* @ts-expect-error server component */}
           <PostVoteServer
             postId={post?.id ?? cachedPost.id}
             getData={async () => {
@@ -61,12 +61,12 @@ const SubHivePostPage = async ({ params }: SubHivePostPageProps) => {
           />
         </Suspense>
 
-        <div className='sm:w-0 w-full flex-1 bg-background p-8 rounded-sm border'>
-          <p className='max-h-40 mt-1 truncate text-xs text-muted-foreground'>
+        <div className='w-full flex-1 rounded-sm border bg-background p-8 sm:w-0'>
+          <p className='mt-1 max-h-40 truncate text-xs text-muted-foreground'>
             Posted by u/{post?.author.username ?? cachedPost.authorUsername}{' '}
             {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
           </p>
-          <h1 className='text-xl font-semibold py-2 leading-6 text-accent-foreground'>
+          <h1 className='py-2 text-xl font-semibold leading-6 text-accent-foreground'>
             {post?.title ?? cachedPost.title}
           </h1>
 
@@ -74,9 +74,9 @@ const SubHivePostPage = async ({ params }: SubHivePostPageProps) => {
           <Suspense
             fallback={
               <Loader2 className='h-5 w-5 animate-spin text-muted-foreground' />
-            }>
-            {/* @ts-expect-error Server Component */}
-            <CommentsSection postId={post?.id ?? cachedPost.id} />
+            }
+          >
+            <CommentsSection postId={post?.id ?? cachedPost.id} comments={[]} />
           </Suspense>
         </div>
       </div>
@@ -86,14 +86,14 @@ const SubHivePostPage = async ({ params }: SubHivePostPageProps) => {
 
 function PostVoteShell() {
   return (
-    <div className='flex items-center flex-col pr-6 w-20'>
+    <div className='flex w-20 flex-col items-center pr-6'>
       {/* upvote */}
       <div className={buttonVariants({ variant: 'ghost' })}>
         <ArrowBigUp className='h-5 w-5 text-muted-foreground' />
       </div>
 
       {/* score */}
-      <div className='text-center py-2 font-medium text-sm text-accent-foreground'>
+      <div className='py-2 text-center text-sm font-medium text-accent-foreground'>
         <Loader2 className='h-3 w-3 animate-spin' />
       </div>
 
