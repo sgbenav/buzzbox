@@ -43,8 +43,9 @@ const SubHivePostPage = async ({ params }: SubHivePostPageProps) => {
   if (!post && !cachedPost) return notFound()
 
   return (
-    <div>
+    <section className='relative'>
       <div className='flex h-full flex-col items-center justify-between sm:flex-row sm:items-start'>
+      <div className='absolute -left-11 md:-left-16 top-4 h-36 w-14 overflow-hidden [&>*]:pr-0'>
         <Suspense fallback={<PostVoteShell />}>
           <PostVoteServer
             postId={post?.id ?? cachedPost.id}
@@ -60,7 +61,7 @@ const SubHivePostPage = async ({ params }: SubHivePostPageProps) => {
             }}
           />
         </Suspense>
-
+      </div>
         <div className='w-full flex-1 rounded-sm border bg-background p-8 sm:w-0'>
           <p className='mt-1 max-h-40 truncate text-xs text-muted-foreground'>
             Posted by u/{post?.author.username ?? cachedPost.authorUsername}{' '}
@@ -80,7 +81,7 @@ const SubHivePostPage = async ({ params }: SubHivePostPageProps) => {
           </Suspense>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -7,7 +7,6 @@ import type { Session } from 'next-auth'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-
 import { UserAvatar } from '@/components/user-avatar'
 
 interface QuickCreatePostProps {
@@ -19,8 +18,8 @@ const QuickCreatePost: FC<QuickCreatePostProps> = ({ session }) => {
   const pathname = usePathname()
 
   return (
-    <ul className='overflow-hidden rounded-md border'>
-      <div className='flex h-full justify-between gap-6 p-8'>
+    <ul className='overflow-hidden rounded-md border px-4 py-4 flex flex-col sm:flex-row sm:items-center gap-4'>
+      <div className='flex gap-x-4 flex-grow'>
         <div className='relative'>
           <UserAvatar
             user={{
@@ -35,8 +34,10 @@ const QuickCreatePost: FC<QuickCreatePostProps> = ({ session }) => {
           onClick={() => router.push(pathname + '/submit')}
           readOnly
           placeholder='Create post'
-          className='border-0 bg-muted'
+          className='w-full border-0 bg-muted'
         />
+      </div>
+      <div className='flex items-center justify-end gap-x-4'>
         <Button
           onClick={() => router.push(pathname + '/submit')}
           variant='ghost'

@@ -63,7 +63,7 @@ const Layout = async ({
 
   return (
     <div className='mx-auto h-full max-w-7xl sm:container'>
-      <div className='flex items-center gap-x-10 rounded-xl bg-gradient-to-r from-background to-muted py-6'>
+      <div className='flex flex-col sm:flex-row sm:items-center gap-2 rounded-xl bg-gradient-to-r from-background to-muted py-4'>
         <div>
           <ToFeedButton />
         </div>

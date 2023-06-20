@@ -32,7 +32,7 @@ const Post: FC<PostProps> = ({
 
   return (
     <div className='rounded-md border bg-card overflow-hidden'>
-      <div className='px-6 py-4 flex justify-between'>
+      <div className='px-1 py-4 md:px-6 flex justify-between'>
         <PostVoteClient
           postId={post.id}
           initialVotesAmt={_votesAmt}

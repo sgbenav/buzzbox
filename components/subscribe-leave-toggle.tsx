@@ -1,12 +1,15 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import { SubscribeToHivePayload } from '@/lib/validators/hive'
+
+import { startTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
-import { useRouter } from 'next/navigation'
-import { startTransition } from 'react'
-import { useToast } from '../hooks/use-toast'
+
+import { SubscribeToHivePayload } from '@/lib/validators/hive'
 import { useCustomToasts } from '@/hooks/use-custom-toasts'
+import { Button } from '@/components/ui/button'
+
+import { useToast } from '../hooks/use-toast'
 
 interface SubscribeLeaveToggleProps {
   isSubscribed: boolean
@@ -89,16 +92,18 @@ const SubscribeLeaveToggle = ({
 
   return isSubscribed ? (
     <Button
-      className='w-full mt-1 mb-4'
+      className='mb-4 mt-1 w-full'
       isLoading={isUnsubLoading}
-      onClick={() => unsubscribe()}>
+      onClick={() => unsubscribe()}
+    >
       Leave community
     </Button>
   ) : (
     <Button
-      className='w-full mt-1 mb-4'
+      className='mb-4 mt-1 w-full'
       isLoading={isSubLoading}
-      onClick={() => subscribe()}>
+      onClick={() => subscribe()}
+    >
       Join to post
     </Button>
   )
