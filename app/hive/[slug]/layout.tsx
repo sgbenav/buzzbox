@@ -9,6 +9,7 @@ import { db } from '@/lib/db'
 import { buttonVariants } from '@/components/ui/button'
 import SubscribeLeaveToggle from '@/components/subscribe-leave-toggle'
 import ToFeedButton from '@/components/feed/to-feed-button'
+import { normalizeSlug } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'BuzzBox',
@@ -117,7 +118,7 @@ const Layout = async ({
                   variant: 'secondary',
                   className: 'w-full',
                 })}
-                href={`/hive/${slug}/submit`}
+                href={`/hive/${normalizeSlug(slug)}/submit`}
               >
                 Create Post
               </Link>

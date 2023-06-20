@@ -2,6 +2,7 @@ import { ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { formatDistanceToNowStrict } from 'date-fns'
 import locale from 'date-fns/locale/en-US'
+import slugify from 'slugify';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -54,3 +55,12 @@ export function formatTimeToNow(date: Date): string {
     },
   })
 }
+
+export const normalizeSlug = (slug: string) => {
+  const options = {
+    replacement: '-',    // Replace spaces and special characters with hyphens
+    lower: true          // Convert the slug to lowercase
+  };
+
+  return slugify(slug, options);
+};

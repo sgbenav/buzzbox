@@ -17,6 +17,7 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command'
+import { normalizeSlug } from '@/lib/utils'
 
 interface SearchBarProps {}
 
@@ -90,7 +91,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
                   value={hive.name}
                 >
                   <Users className='mr-2 h-4 w-4' />
-                  <a href={`/hive/${hive.name}`}>hive/{hive.name}</a>
+                  <a href={`/hive/${normalizeSlug(hive.name)}`}>hive/{hive.name}</a>
                 </CommandItem>
               ))}
             </CommandGroup>

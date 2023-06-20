@@ -10,6 +10,7 @@ import { useCustomToasts } from '@/hooks/use-custom-toasts'
 import { toast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { normalizeSlug } from '@/lib/utils'
 
 const Page = () => {
   const router = useRouter()
@@ -19,7 +20,7 @@ const Page = () => {
   const { mutate: createCommunity, isLoading } = useMutation({
     mutationFn: async () => {
       const payload: CreateHivePayload = {
-        name: input,
+        name: normalizeSlug(input),
       }
 
       const { data } = await axios.post('/api/hive', payload)
