@@ -6,7 +6,7 @@ import { authOptions } from '@/lib/auth'
 import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { UserAccountNav } from '@/components/user-account-menu'
+import { UserAccountMenu } from '@/components/user-account-menu'
 
 export default async function Header() {
   const session = await getServerSession(authOptions)
@@ -24,7 +24,7 @@ export default async function Header() {
             <div className='flex items-center gap-x-2'>
               {/* actions */}
               {session?.user ? (
-                <UserAccountNav user={session.user} />
+                <UserAccountMenu user={session.user} />
               ) : (
                 <Link
                   href='/sign-in'

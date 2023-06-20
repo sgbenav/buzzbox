@@ -13,11 +13,11 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { UserAvatar } from '@/components/user-avatar'
 
-interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
+interface UserAccountMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, 'name' | 'image' | 'email'>
 }
 
-export function UserAccountNav({ user }: UserAccountNavProps) {
+export function UserAccountMenu({ user }: UserAccountMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -26,7 +26,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
           className='h-8 w-8'
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='bg-white' align='end'>
+      <DropdownMenuContent className='bg-background' align='end'>
         <div className='flex items-center justify-start gap-2 p-2'>
           <div className='flex flex-col space-y-1 leading-none'>
             {user.name && <p className='font-medium'>{user.name}</p>}

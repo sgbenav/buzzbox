@@ -29,10 +29,10 @@ export const metadata: Metadata = {
 
 interface RootLayoutProps {
   children: React.ReactNode
-  authModal: React.ReactNode
+  modal: React.ReactNode
 }
 
-export default function RootLayout({ children, authModal }: RootLayoutProps) {
+export default function RootLayout({ children, modal }: RootLayoutProps) {
   return (
     <>
       <html lang='en' suppressHydrationWarning>
@@ -48,9 +48,9 @@ export default function RootLayout({ children, authModal }: RootLayoutProps) {
               <div className='relative flex min-h-screen flex-col'>
                 {/* @ts-expect-error Server Component */}
                 <Header />
-                {authModal}
                 <main className='container mx-auto h-full flex-1 pt-10'>
                   {children}
+                  {modal}
                 </main>
               </div>
             </QueryProvider>
