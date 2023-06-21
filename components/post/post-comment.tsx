@@ -130,7 +130,7 @@ const PostComment: FC<PostCommentProps> = ({
             <div className='mt-2 flex justify-end gap-2'>
               <Button
                 tabIndex={-1}
-                variant='subtle'
+                variant='outline'
                 onClick={() => setIsReplying(false)}>
                 Cancel
               </Button>
