@@ -14,8 +14,8 @@ export default async function Header() {
 
   return (
     <header className='sticky top-0 z-40 w-full'>
-      <div className='w-full bg-gradient-to-r from-background to-red-500 pb-1'>
-        <div className='bg-background'>
+      <div className='w-full bg-gradient-to-r from-background to-primary pb-1'>
+        <div className='bg-card'>
           <nav className='container flex justify-between gap-x-4 p-4'>
             <Link href='/' className='hidden items-center space-x-2 sm:flex'>
               <Icons.logo className='h-6 w-6 outline outline-2' />

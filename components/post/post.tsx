@@ -1,12 +1,15 @@
 'use client'
 
-import { formatTimeToNow } from '@/lib/utils'
-import { Post, User, Vote } from '@prisma/client'
-import { MessageSquare } from 'lucide-react'
+import { useRef } from 'react'
 import Link from 'next/link'
-import { FC, useRef } from 'react'
-import PostVoteClient from '@/components/post/post-vote-client'
+import { MessageSquare } from 'lucide-react'
+
+import { formatTimeToNow } from '@/lib/utils'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import EditorOutput from '@/components/editor/editor-output'
+
+import { Post, User, Vote } from '@prisma/client'
+import PostVoteClient from './post-vote-client'
 
 type PartialVote = Pick<Vote, 'type'>
 
@@ -21,65 +24,68 @@ interface PostProps {
   commentAmt: number
 }
 
-const Post: FC<PostProps> = ({
+export default function Post({
   post,
-  votesAmt: _votesAmt,
-  currentVote: _currentVote,
+  votesAmt,
   hiveName,
+  currentVote,
   commentAmt,
-}) => {
+}: PostProps) {
   const pRef = useRef<HTMLParagraphElement>(null)
 
   return (
-    <div className='rounded-md border bg-card overflow-hidden'>
-      <div className='px-1 py-4 md:px-6 flex justify-between'>
-        <PostVoteClient
+    <Card className='overflow-hidden'>
+              <PostVoteClient
           postId={post.id}
-          initialVotesAmt={_votesAmt}
-          initialVote={_currentVote?.type}
+          initialVotesAmt={votesAmt}
+          initialVote={currentVote?.type}
         />
-
-        <div className='w-0 flex-1'>
-          <div className='max-h-40 mt-1 text-xs text-muted-foreground'>
-            {hiveName ? (
-              <>
-                <a
-                  className='underline text-muted-foreground text-sm underline-offset-2'
-                  href={`/hive/${hiveName}`}>
-                  hive/{hiveName}
-                </a>
-                <span className='px-1'>•</span>
-              </>
-            ) : null}
-            <span>Posted by u/{post.author.username}</span>{' '}
-            {formatTimeToNow(new Date(post.createdAt))}
-          </div>
-          <a href={`/hive/${hiveName}/post/${post.id}`}>
-            <h1 className='text-lg font-semibold py-2 leading-6 text-accent-foreground'>
-              {post.title}
-            </h1>
-          </a>
-
-          <div
-            className='relative text-sm max-h-40 w-full overflow-clip'
-            ref={pRef}>
-            <EditorOutput content={post.content} />
-            {pRef.current?.clientHeight === 160 ? (
-              // blur bottom if content is too long
-              <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-background to-transparent'></div>
-            ) : null}
-          </div>
+      <CardHeader className='space-y-1 text-sm px-10'>
+        <div>
+          {hiveName ? (
+            <>
+              <a
+                className='text-sm text-muted-foreground underline underline-offset-2'
+                href={`/hive/${hiveName}`}
+              >
+                hive/{hiveName}
+              </a>
+              <span className='px-1'>•</span>
+            </>
+          ) : null}
+          <span>Posted by u/{post.author.username}</span>{' '}
+          {formatTimeToNow(new Date(post.createdAt))}
         </div>
-      </div>
+      </CardHeader>
+      <CardContent className='w-full p-0'>
+        <a href={`/hive/${hiveName}/post/${post.id}`}>
+          <h1 className='px-10 py-2 text-lg font-semibold leading-6'>
+            {post.title}
+          </h1>
+        </a>
+        <div
+          className='relative max-h-40 w-full overflow-clip text-sm'
+          ref={pRef}
+        >
+          <div className='px-10 pb-4'>
+            <EditorOutput content={post.content} />
+          </div>
 
-      <div className='z-20 text-sm px-4 py-4 sm:px-6 border-t bg-secondary'>
+          {pRef.current?.clientHeight === 160 ? (
+            // blur bottom if content is too long
+            <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-muted/50 to-transparent'></div>
+          ) : null}
+        </div>
+      </CardContent>
+      <CardFooter className='bg-muted py-4 px-12 text-sm'>
         <Link
           href={`/hive/${hiveName}/post/${post.id}`}
-          className='w-fit flex items-center gap-2 text-secondary-foreground'>
-          <MessageSquare className='h-4 w-4 text-secondary-foreground' /> {commentAmt} comments
+          className='flex w-fit items-center gap-2'
+        >
+          <MessageSquare className='h-4 w-4' />{' '}
+          {commentAmt} comments
         </Link>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   )
 }
-export default Post

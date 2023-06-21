@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
 
+import { normalizeSlug } from '@/lib/utils'
 import { CreateHivePayload } from '@/lib/validators/hive'
 import { useCustomToasts } from '@/hooks/use-custom-toasts'
 import { toast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { normalizeSlug } from '@/lib/utils'
 
 const Page = () => {
   const router = useRouter()
@@ -61,13 +61,13 @@ const Page = () => {
   })
 
   return (
-    <div className='mx-auto flex h-full max-w-3xl items-center'>
-      <div className='relative h-fit w-full space-y-6 rounded-lg border bg-background p-8'>
+    <div className='mx-auto flex h-full max-w-3xl items-center bg-background text-foreground'>
+      <div className='relative h-fit w-full space-y-6 rounded-lg border border-border bg-card p-8'>
         <div className='flex items-center justify-between'>
           <h1 className='text-xl font-semibold'>Create a Community</h1>
         </div>
 
-        <hr className='h-px' />
+        <hr className='h-px bg-border' />
 
         <div>
           <p className='text-lg font-medium'>Name</p>
@@ -81,7 +81,7 @@ const Page = () => {
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className='border bg-input pl-10 text-accent-foreground'
+              className='border border-border pl-10 text-foreground'
             />
           </div>
         </div>
@@ -98,7 +98,7 @@ const Page = () => {
             isLoading={isLoading}
             disabled={input.length === 0}
             onClick={() => createCommunity()}
-            variant='primary'
+            variant="secondary"
           >
             Create Community
           </Button>
