@@ -13,8 +13,8 @@ import {
 
 export default function HomeCommunityCard() {
   return (
-    <Card className='order-first h-fit overflow-hidden md:order-last '>
-      <CardHeader className='space-y-1'>
+    <Card className='order-first h-fit overflow-hidden md:order-last'>
+      <CardHeader className='space-y-1 bg-muted'>
         <CardTitle className='flex items-center gap-2 text-xl'>
           <HomeIcon className='h-6 w-6' />
           Home

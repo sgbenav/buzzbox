@@ -76,7 +76,7 @@ const Layout = async ({
         </ul>
 
         {/* info sidebar */}
-        <div className='order-first h-fit overflow-hidden rounded-lg border bg-background md:order-last'>
+        <div className='order-first h-fit overflow-hidden rounded-lg border bg-card md:order-last'>
           <div className='px-6 py-4'>
             <p className='py-3 font-semibold'>About hive/{hive.name}</p>
           </div>

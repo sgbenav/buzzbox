@@ -185,7 +185,7 @@ export const Editor: React.FC<EditorProps> = ({ hiveId }) => {
   const { ref: titleRef, ...rest } = register('title')
 
   return (
-    <div className='w-full rounded-lg border-4 border-muted bg-background p-4'>
+    <div className='w-full rounded-lg border-4 border-muted bg-card p-4'>
       <form
         id='hive-post-form'
         className='w-fit'
@@ -200,7 +200,7 @@ export const Editor: React.FC<EditorProps> = ({ hiveId }) => {
             }}
             {...rest}
             placeholder='Title'
-            className='w-full resize-none appearance-none overflow-hidden bg-background text-5xl font-bold focus:outline-none'
+            className='w-full resize-none appearance-none overflow-hidden bg-card text-5xl font-bold focus:outline-none'
           />
           <div id='editor' className='min-h-[300px]' />
           <p className='text-sm text-muted-foreground'>

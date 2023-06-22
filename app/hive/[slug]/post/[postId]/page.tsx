@@ -62,7 +62,7 @@ const SubHivePostPage = async ({ params }: SubHivePostPageProps) => {
           />
         </Suspense>
       </div>
-        <div className='w-full flex-1 rounded-sm border bg-background p-8 sm:w-0'>
+        <div className='w-full flex-1 rounded-sm border bg-card p-8 sm:w-0'>
           <p className='mt-1 max-h-40 truncate text-xs text-muted-foreground'>
             Posted by u/{post?.author.username ?? cachedPost.authorUsername}{' '}
             {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}

@@ -95,6 +95,7 @@ const SubscribeLeaveToggle = ({
       className='mb-4 mt-1 w-full'
       isLoading={isUnsubLoading}
       onClick={() => unsubscribe()}
+      variant='secondary'
     >
       Leave community
     </Button>
@@ -103,6 +104,7 @@ const SubscribeLeaveToggle = ({
       className='mb-4 mt-1 w-full'
       isLoading={isSubLoading}
       onClick={() => subscribe()}
+      variant='secondary'
     >
       Join to post
     </Button>

@@ -62,7 +62,7 @@ const CreateComment: FC<CreateCommentProps> = ({ postId, replyToId }) => {
           onChange={(e) => setInput(e.target.value)}
           rows={1}
           placeholder='What are your thoughts?'
-          className='bg-muted'
+          className='bg-accent'
         />
 
         <div className='mt-4 flex justify-end'>
